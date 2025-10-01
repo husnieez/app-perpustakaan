@@ -29,11 +29,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    // File: app/Models/User.php
     protected $fillable = [
         'name',
         'email',
         'password',
         'role',
     ];
+
+    public function loans(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Loan::class);
+    }
 }

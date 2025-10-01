@@ -49,4 +49,48 @@
             <div class="detail-value">{{ $member->alamat ?? '-' }}</div>
         </div>
     </div>
+
+    <h2 style="margin-top: 32px;">Riwayat Peminjaman</h2>
+    <p><em>Diambil lewat relasi <code>$member->loans</code> - satu anggota bisa punya banyak transaksi peminjaman.</em></p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Tanggal Pinjam</th>
+                <th>Tanggal Kembali</th>
+                <th>Petugas</th>
+                <th>Buku</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($member['loans'] as $loan)
+                <tr>
+                    <td>{{ $loan['tanggal_pinjam'] }}</td>
+                    <td>{{ $loan['tanggal_kembali'] }}</td>
+                    <td>{{ $loan['user']['name'] ?? '-' }}</td>
+                    <td>
+                        @foreach ($loan['loanItems'] as $item)
+                            {{ $item['book']['judul'] }}@if (!$loop->last), @endif
+                        @endforeach
+                    </td>
+                    <td>
+                        @if ($loan['status'] === 'dikembalikan')
+                            <span class="badge badge-success">Dikembalikan</span>
+                        @elseif ($loan['status'] === 'dipinjam')
+                            <span class="badge badge-warning">Dipinjam</span>
+                        @elseif ($loan['status'] === 'terlambat')
+                            <span class="badge badge-danger">Terlambat</span>
+                        @else
+                            <span class="badge">{{ ucfirst($loan['status']) }}</span>
+                        @endif
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="5">Anggota ini belum pernah meminjam buku.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
 @endsection

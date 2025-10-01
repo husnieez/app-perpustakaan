@@ -144,7 +144,7 @@
             font-weight: 600;
         }
 
-        .badge-success {
+        .badge-success, .badge-dikembalikan {
             background-color: #dcfce7;
             color: #15803d;
         }
@@ -154,9 +154,22 @@
             color: #1e40af;
         }
 
-        .badge-danger {
+        .badge-warning, .badge-dipinjam {
+            background-color: #fef3c7;
+            color: #b45309;
+        }
+
+        .badge-danger, .badge-terlambat {
             background-color: #fee2e2;
             color: #b91c1c;
+        }
+
+        .btn-success {
+            background-color: #16a34a;
+            color: #ffffff;
+        }
+        .btn-success:hover {
+            background-color: #15803d;
         }
 
         /* Container Pembungkus Tabel agar Rapi */
