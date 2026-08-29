@@ -10,3 +10,5 @@ Bagian yang megang data mentah dan aturan mainnya. Cuma dapur yang tahu takaran 
 Penghubung serba bisa. Pas kamu manggil buat pesen es teh manis (kirim request), pelayan bakal lari ke dapur (Model) buat minta dibuatin, terus nganterin gelasnya ke meja kamu (View). Pokoknya jembatan setiap pengguna, kayak lalu lintas
 
 Intinya, arsitektur MVC dibikin biar kodingan nggak numpuk jadi spaghetti code di satu file. Jadi pas frontend mau ganti warna tombol, cukup bongkar file View tanpa takut ngerusak query database di Model.
+
+Tugas Screenshot = https://drive.google.com/drive/folders/1Na4Ba4gOshhAum0V-mq6WTjmZOvL0pEX?usp=sharing
