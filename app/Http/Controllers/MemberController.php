@@ -3,23 +3,52 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMemberRequest;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
+    // Dummy data gak tuh
+    private array $members = [
+        [
+            'id'           => 3125600064,
+            'nama'         => 'Husni',
+            'nim'          => '1234567890',
+            'email'        => 'husni@example.com',
+            'nomer_telpon' => '081234567890',
+            'alamat'       => 'Jl. Keputih No. 1, Surabaya',
+            'status'       => 'aktif',
+        ],
+        [
+            'id'           => 3125600002,
+            'nama'         => 'Budi',
+            'nim'          => '9876543210',
+            'email'        => 'budi@example.com',
+            'nomer_telpon' => '082345678901',
+            'alamat'       => 'Jl. Mulyorejo No. 2, Surabaya',
+            'status'       => 'pasif',
+        ],
+    ];
+
     public function index()
     {
-        return 'MemberController@index';
+        $members = $this->members;
+        return view('members.index', compact('members'));
     }
-
     public function create()
     {
-        return 'MemberController@create';
+        return view('members.create');
     }
 
-    public function store(Request $request)
+    // Simpan data member baru
+    public function store(StoreMemberRequest $request)
     {
-        return 'MemberController@store';
+        $validated = $request->validated();
+
+
+        return redirect()
+            ->route('members.index')
+            ->with('success', 'Data member berhasil ditambahkan!');
     }
 
     public function show(string $id)
@@ -40,11 +69,5 @@ class MemberController extends Controller
     public function destroy(string $id)
     {
         return "MemberController@destroy, id: {$id}";
-    }
-
-    // File: app/Http/Controllers/LoanController.php
-    public function kembalikan(string $id)
-    {
-        return "LoanController@kembalikan, id: {$id}";
     }
 }
