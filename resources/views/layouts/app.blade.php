@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>@yield('title', 'Perpustakaan Digital Kampus')</title>
 
-    
     <style>
         * { box-sizing: border-box; }
         body { font-family: sans-serif; margin: 0; color: #1f2937; }
@@ -23,6 +22,7 @@
         footer { text-align: center; padding: 20px; color: #6b7280; font-size: 14px; border-top: 1px solid #e5e7eb; margin-top: 40px; }
         .search-form { margin-bottom: 20px; display: flex; gap: 8px; }
         .search-input { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        
         /* Card Container untuk Form */
         .form-card {
             background: #ffffff;
@@ -64,6 +64,7 @@
         /* Mengatur Tampilan Input, Select, & Textarea */
         .form-group input[type="text"],
         .form-group input[type="email"],
+        .form-group input[type="number"],
         .form-group select,
         .form-group textarea {
             width: 100%;
@@ -118,14 +119,137 @@
                 gap: 0;
             }
         }
+        
+        .detail-value {
+            padding: 8px 12px;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #1e293b;
+        }
 
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background-color: #dcfce7;
+            color: #15803d;
+        }
+
+        .badge-danger {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+
+        /* Container Pembungkus Tabel agar Rapi */
+        .table-container {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 0;
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: #475569;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 12px 16px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+            color: #334155;
+            vertical-align: middle;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        /* Flexbox untuk Barisan Tombol Aksi */
+        .action-buttons {
+            display: inline-flex;
+            gap: 6px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Styling Dasar Tombol Aksi */
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 4px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            line-height: 1.2;
+        }
+
+        /* Opsi Detail (Biru Muda / Info) */
+        .btn-info {
+            background-color: #0284c7;
+            color: #ffffff;
+        }
+        .btn-info:hover {
+            background-color: #0369a1;
+        }
+
+        /* Opsi Edit (Kuning / Warning) */
+        .btn-warning {
+            background-color: #d97706;
+            color: #ffffff;
+        }
+        .btn-warning:hover {
+            background-color: #b45309;
+        }
+
+        /* Opsi Hapus (Merah / Danger) */
+        .btn-danger {
+            background-color: #dc2626;
+            color: #ffffff;
+        }
+        .btn-danger:hover {
+            background-color: #b91c1c;
+        }
+
+        /* Tombol Sekunder (Kembali / Cari) */
+        .btn-secondary {
+            background-color: #64748b;
+            color: #ffffff;
+        }
+        .btn-secondary:hover {
+            background-color: #475569;
+        }
     </style>
 </head>
 <body>
     @include('partials.navbar')
 
     <main>
-        @include('partials.alert')
+        {{-- BARIS @include('partials.alert') DIHAPUS DARI SINI SUPAYA NOTIFIKASI TIDAK GANDA --}}
 
         @yield('content')
     </main>

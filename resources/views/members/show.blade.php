@@ -3,16 +3,50 @@
 @section('title', 'Detail Anggota')
 
 @section('content')
-    <h1>Detail Anggota</h1>
-    <p><a href="{{ route('members.index') }}">&larr; Kembali ke daftar anggota</a></p>
+    <h1 style="margin-bottom: 8px;">Detail Anggota</h1>
 
-    <ul>
-        <li><strong>ID:</strong> {{ $member->id }}</li>
-        <li><strong>Nama:</strong> {{ $member->nama }}</li>
-        <li><strong>NIM:</strong> {{ $member->nim }}</li>
-        <li><strong>Email:</strong> {{ $member->email }}</li>
-        <li><strong>No. Telepon:</strong> {{ $member->nomor_telepon }}</li>
-        <li><strong>Alamat:</strong> {{ $member->alamat }}</li>
-        <li><strong>Status:</strong> {{ ucfirst($member->status) }}</li>
-    </ul>
+    <p style="margin-bottom: 24px;">
+        <a href="{{ route('members.index') }}" class="btn" style="background: #64748b;">&larr; Kembali ke daftar anggota</a>
+        <a href="{{ route('members.edit', $member->id) }}" class="btn" style="background: #f59e0b; margin-left: 8px;">Edit Data</a>
+    </p>
+
+    <div class="form-card">
+        <div class="form-row">
+            <div class="form-group">
+                <label>Nama Lengkap</label>
+                <div class="detail-value">{{ $member->nama }}</div>
+            </div>
+
+            <div class="form-group">
+                <label>NIM</label>
+                <div class="detail-value">{{ $member->nim }}</div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Email</label>
+                <div class="detail-value">{{ $member->email }}</div>
+            </div>
+
+            <div class="form-group">
+                <label>Nomor Telepon</label>
+                <div class="detail-value">{{ $member->nomor_telepon ?? $member->telepon ?? '-' }}</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Status Anggota</label>
+            <div>
+                <span class="badge {{ strtolower($member->status) == 'aktif' ? 'badge-success' : 'badge-danger' }}">
+                    {{ ucfirst($member->status) }}
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Alamat</label>
+            <div class="detail-value">{{ $member->alamat ?? '-' }}</div>
+        </div>
+    </div>
 @endsection
