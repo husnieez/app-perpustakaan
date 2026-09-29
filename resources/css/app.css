@@ -1,4 +1,8 @@
 @import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+
+/* Wajib ditambahkan agar file Blade di folder views terdeteksi */
+@source '../views/**/*.blade.php';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';

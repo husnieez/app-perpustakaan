@@ -1,65 +1,67 @@
 {{-- File: resources/views/members/create.blade.php --}}
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Tambah Anggota</title>
-    <style>
-        body { font-family: sans-serif; margin: 40px; max-width: 500px; }
-        label { display: block; margin-top: 12px; font-weight: bold; }
-        input, textarea, select { width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box; }
-        .error { color: #b91c1c; font-size: 14px; margin-top: 4px; }
-        .btn { margin-top: 20px; padding: 8px 16px; background: #2563eb; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
-    </style>
-</head>
-<body>
-    <h1>Tambah Anggota</h1>
-    <p><a href="{{ route('members.index') }}">&larr; Kembali ke daftar anggota</a></p>
+@extends('layouts.app')
 
-    <form action="{{ route('members.store') }}" method="POST">
+@section('title', 'Tambah Anggota')
+
+@section('content')
+    <h1 style="margin-bottom: 8px;">Tambah Anggota</h1>
+
+    <p style="margin-bottom: 24px;">
+        <a href="{{ route('members.index') }}" class="btn" style="background: #64748b;">&larr; Kembali ke daftar anggota</a>
+    </p>
+
+    <!-- Alert Error Validasi -->
+    @if ($errors->any())
+        <div class="alert-danger">
+            <ul style="margin: 0; padding-left: 18px;">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ route('members.store') }}" method="POST" class="form-card">
         @csrf
 
-        <label for="nama">Nama</label>
-        <input type="text" name="nama" id="nama" value="{{ old('nama') }}">
-        @error('nama')
-            <div class="error">{{ $message }}</div>
-        @enderror
+        <div class="form-row">
+            <div class="form-group">
+                <label for="nama">Nama <span class="required">*</span></label>
+                <input type="text" name="nama" id="nama" value="{{ old('nama') }}" placeholder="Masukkan nama lengkap" required>
+            </div>
 
-        <label for="nim">NIM</label>
-        <input type="text" name="nim" id="nim" value="{{ old('nim') }}">
-        @error('nim')
-            <div class="error">{{ $message }}</div>
-        @enderror
+            <div class="form-group">
+                <label for="nim">NIM <span class="required">*</span></label>
+                <input type="text" name="nim" id="nim" value="{{ old('nim') }}" placeholder="Contoh: 3125600064" required>
+            </div>
+        </div>
 
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" value="{{ old('email') }}">
-        @error('email')
-            <div class="error">{{ $message }}</div>
-        @enderror
+        <div class="form-row">
+            <div class="form-group">
+                <label for="email">Email <span class="required">*</span></label>
+                <input type="email" name="email" id="email" value="{{ old('email') }}" placeholder="nama@email.com" required>
+            </div>
 
-        <label for="nomer_telpon">Nomor Telepon</label>
-        <input type="text" name="nomer_telpon" id="nomer_telpon" value="{{ old('nomer_telpon') }}">
-        @error('nomer_telpon')
-            <div class="error">{{ $message }}</div>
-        @enderror
+            <div class="form-group">
+                <label for="telepon">Telepon <span class="required">*</span></label>
+                <input type="text" name="telepon" id="telepon" value="{{ old('telepon') }}" placeholder="08xxxxxxxxxx" required>
+            </div>
+        </div>
 
-        <label for="alamat">Alamat</label>
-        <textarea name="alamat" id="alamat" rows="4">{{ old('alamat') }}</textarea>
-        @error('alamat')
-            <div class="error">{{ $message }}</div>
-        @enderror
+        <div class="form-group">
+            <label for="status">Status <span class="required">*</span></label>
+            <select name="status" id="status" required>
+                <option value="">-- Pilih Status --</option>
+                <option value="aktif" {{ old('status') == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                <option value="nonaktif" {{ old('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
+            </select>
+        </div>
 
-        <label for="status">Status</label>
-        <select name="status" id="status">
-            <option value="">-- Pilih Status --</option>
-            <option value="aktif" @selected(old('status') == 'aktif')>Aktif</option>
-            <option value="pasif" @selected(old('status') == 'pasif')>Pasif</option>
-        </select>
-        @error('status')
-            <div class="error">{{ $message }}</div>
-        @enderror
+        <div class="form-group">
+            <label for="alamat">Alamat</label>
+            <textarea name="alamat" id="alamat" rows="3" placeholder="Masukkan alamat domisili">{{ old('alamat') }}</textarea>
+        </div>
 
-        <button type="submit" class="btn">Simpan</button>
+        <button type="submit" class="btn btn-primary">Simpan Data Anggota</button>
     </form>
-</body>
-</html>
+@endsection

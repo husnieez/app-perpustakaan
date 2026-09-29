@@ -6,6 +6,12 @@
 @section('content')
     <h1>Daftar Anggota</h1>
 
+    <form action="{{ route('members.index') }}" method="GET" class="search-form">
+        <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama anggota..." class="search-input">
+        <button type="submit" class="btn">Cari</button>
+    </form>
+
+    <p><a href="{{ route('members.create') }}" class="btn">+ Tambah Anggota</a></p>
     <table>
         <thead>
             <tr>
@@ -34,6 +40,7 @@
             @endforelse
         </tbody>
     </table>
-
-    <p><em>Catatan: data di atas masih data dummy (array statis di Controller). Form tambah/edit anggota dan CRUD lengkap anggota baru dibuat mulai Pertemuan 5.</em></p>
+    
+     {{-- Pagination dengan query search tetap terbawa --}}
+    {{ $members->appends(request()->query())->links() }}
 @endsection

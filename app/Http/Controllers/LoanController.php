@@ -1,5 +1,6 @@
 <?php
 // File: app/Http/Controllers/LoanController.php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;

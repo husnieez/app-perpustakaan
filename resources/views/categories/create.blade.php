@@ -1,34 +1,48 @@
 {{-- File: resources/views/categories/create.blade.php --}}
 @extends('layouts.app')
 
-@section('title', 'Daftar Kategori')
+@section('title', 'Tambah Kategori')
 
 @section('content')
+    <h1 style="margin-bottom: 8px;">Tambah Kategori</h1>
+
+    <p style="margin-bottom: 24px;">
+        <a href="{{ route('categories.index') }}" class="btn" style="background: #64748b;">&larr; Kembali ke daftar kategori</a>
+    </p>
+
+    <!-- Alert Success/Error dari partials -->
     @include('partials.alert')
-    <h1>Tambah Kategori</h1>
 
-    <p><a href="{{ route('categories.index') }}" class="btn">&larr; Kembali ke daftar kategori</a></p>
+    <!-- Alert Error Validasi Ringkasan -->
+    @if ($errors->any())
+        <div class="alert-danger">
+            <ul style="margin: 0; padding-left: 18px;">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-    <form action="{{ route('categories.store') }}" method="POST">
+    <form action="{{ route('categories.store') }}" method="POST" class="form-card">
         @csrf
 
-        <p>
-            <label for="nama_kategori">Nama Kategori</label><br>
-            <input type="text" name="nama_kategori" id="nama_kategori"
-                   value="{{ old('nama_kategori') }}">
+        <div class="form-group">
+            <label for="nama_kategori">Nama Kategori <span class="required">*</span></label>
+            <input type="text" name="nama_kategori" id="nama_kategori" value="{{ old('nama_kategori') }}" placeholder="Masukkan nama kategori" required>
             @error('nama_kategori')
-                <br><span class="error">{{ $message }}</span>
+                <span class="error-message">{{ $message }}</span>
             @enderror
-        </p>
+        </div>
 
-        <p>
-            <label for="deskripsi">Deskripsi (opsional)</label><br>
-            <textarea name="deskripsi" id="deskripsi" rows="4">{{ old('deskripsi') }}</textarea>
+        <div class="form-group">
+            <label for="deskripsi">Deskripsi (opsional)</label>
+            <textarea name="deskripsi" id="deskripsi" rows="4" placeholder="Masukkan deskripsi singkat kategori">{{ old('deskripsi') }}</textarea>
             @error('deskripsi')
-                <br><span class="error">{{ $message }}</span>
+                <span class="error-message">{{ $message }}</span>
             @enderror
-        </p>
+        </div>
 
-        <button type="submit" class="btn">Simpan</button>
+        <button type="submit" class="btn btn-primary">Simpan Kategori</button>
     </form>
 @endsection
